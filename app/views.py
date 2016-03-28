@@ -1,5 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+	context = {}
+	return render(request, 'app/index.html', context)
+
+def file_upload(request):
+	print request.FILES['file']
+	return HttpResponse('Done')
