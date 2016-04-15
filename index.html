@@ -55,9 +55,6 @@
                     <li>
                         <a href="about.html">About</a>
                     </li>
-                    <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -88,7 +85,7 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <p>The aim of the project is to extract videos related to a news article from YouTube. The videos can be directly uploaded by the news publisher or a user sharing the video about that event. The news article will be given in JSON format. It is done for both Hindi and English news articles.</p>
 
-                    <p>. The solution we have come up with is "Data Extraction from News Article -> Queries formation -> YouTube Video Extraction based upon generated queries -> Ranking the extracted videos</p>
+                    <p>The solution we have come up with is "Data Extraction from News Article -> Queries formation -> YouTube Video Extraction based upon generated queries -> Ranking the extracted videos" </p>
 
                    
 
@@ -96,18 +93,29 @@
 
                     <p>Initially we do the Pre processing and the Data Exrtraction. It id followed by Query Formation, Video Extraction and ranking the result. </p>
 
-                    <p>Textblob api is used to extract the following data (data extraction) from the text of the news article : Noun Phrases, Sentiment Analysis, Synsets</p>
+                    <h4>Data Extraction :</h4><p>Textblob api is used to extract the following data from the text of the news article : Noun Phrases, Sentiment Analysis, Synsets</p>
 
                     <!--<blockquote>The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.</blockquote> -->
 
-                    <h4>>Steps taken for query formation :</h4>  <p>Getting the title as the base query. Creating inverted index of the text data. Retaining the terms in the title with higher idf value in the text and removing the ones with lower value. A phrase being considered as a single term.Creating multiple queries using n-grams. Fusing the formed queries with synsets if relevant result not found.</p>
+                    <h4>Steps taken for query formation :</h4>  <p>Getting the title as the base query. Creating inverted index of the text data. Retaining the terms in the title with higher idf value in the text and removing the ones with lower value. A phrase being considered as a single term.Creating multiple queries using n-grams. Fusing the formed queries with synsets if relevant result not found.</p>
 
-                    <h2 class="section-heading">Reaching for the Stars</h2>
+                    <h4>Video Extraction :</h4><p> All the queries formed in the previous step are used to search the YouTube and the urls of all the resulting videos are stored.Titles are extracted from the video urls using lxml library. Thumbnails of the videos are extracted by parsing the search result page.</p>
 
-                    <p>As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.</p>
+
+                    <h2 class="section-heading">Ranking the videos</h2>
+
+                    <p>The extracted videos were ranked using the following algorithm :
+                        1. A rank value of the video is computed by finding the similarity between the query term and the title of the video. <br>
+                        2. Noun terms in title are given more weightage. <br>
+                        3. Adding static values to videos from trusted sources. <br>
+                        4. Titles of videos in Hindi are given more priority than English ones if the news article is in Hindi. <br>
+</p>
 
                     <a href="#">
-                        <img class="img-responsive" src="img/post-sample-image.jpg" alt="">
+                        <img class="img-responsive" src="img/image1.jpg" alt="">
+                    </a>
+                    <a href="#">
+                        <img class="img-responsive" src="img/image2.jpg" alt="">
                     </a>
                     <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
 
