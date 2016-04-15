@@ -1,7 +1,44 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
+
 <head>
+<style>
+
+.social:hover {
+     -webkit-transform: scale(1.1);
+     -moz-transform: scale(1.1);
+     -o-transform: scale(1.1);
+ }
+ .social {
+     -webkit-transform: scale(0.8);
+     /* Browser Variations: */
+     
+     -moz-transform: scale(0.8);
+     -o-transform: scale(0.8);
+     -webkit-transition-duration: 0.5s;
+     -moz-transition-duration: 0.5s;
+     -o-transition-duration: 0.5s;
+ }
+
+/*
+    Multicoloured Hover Variations
+*/
+ 
+ #social-fb:hover {
+     color: #3B5998;
+ }
+ #social-tw:hover {
+     color: #4099FF;
+ }
+ #social-gp:hover {
+     color: #d34836;
+ }
+ #social-em:hover {
+     color: #f39c12;
+ }
+ </style>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,16 +84,6 @@
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a href="about.html">About</a>
-                    </li>
-                </ul>
-            </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
@@ -64,7 +91,7 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/cover.jpg')">
+    <header class="intro-header" style="background-image: url('img/cover.jpg')" height="150">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -76,19 +103,40 @@
                 </div>
             </div>
         </div>
-    <div>
+    <div >
     <a href="https://github.com/saurabhjain0007/YouTubeVideoExtractor">
         <img src="img/github.png" height="50" width="50" alt="Link to GitHub">
     </a>
-    <br>
     <a href="#">
-        <img src="img/youtube.png" height="50" width="50" alt="Link to the YouTube Video">
+        <img src="img/youtube.jpeg" height="50" width="50" alt="Link to the YouTube Video">
     </a>
-    <br>
     <a href="#">
         <img src="img/ppt.png" height="50" width="50" alt="Link to the PPT">
     </a>
     </div>
+
+    <!-- Social Footer, Colour Matching Icons -->
+<!-- Include Font Awesome Stylesheet in Header -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+<!-- // -->
+<div class="container">
+<h3>Multi-Coloured</h3>
+    <hr>
+        <div class="text-center center-block">
+            <p class="txt-railway">- Bootsnipp.com -</p>
+            <br />
+                <a href="https://www.facebook.com/bootsnipp"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
+                <a href="https://twitter.com/bootsnipp"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
+                <a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
+                <a href="mailto:bootsnipp@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
+</div>
+    <hr>
+</div>
+
+<br />
+
+
     </header>
 
 
@@ -138,7 +186,7 @@
                     <span class="caption text-muted">One of the n-gram generated query giving relevant result</span>
                     <br> 
 
-                    <h2 class="section-heading">Problems faced</h2>
+                    <h2 class="section-heading">Problems Faced</h2>
                     <p> 1. Proper Phrase Identification. Since some terms were non-uniformly broken.<br> </p>
                     <p> 2. Optimizing the search to reduce the time was a major challenge.<br> </p>
                     <p> 3. Proper query formulation for Hindi was also a major task and challenge.<br> </p>
