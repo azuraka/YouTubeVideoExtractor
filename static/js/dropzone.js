@@ -1397,6 +1397,27 @@
     }
   };
 
+  Dropzone.options.myAwesomeDropzone = {
+  init: function() {
+    thisDropzone = this;
+        this.on("success", function(file, responseText) {
+            //var responseText = file.id // or however you would point to your assigned file ID here;
+            console.log(responseText); // console should show the ID you pointed to
+            //var result = responseText.substring(1, responseText.length-1);
+            all_links = responseText.split("|||")
+            for(i=0;i<all_links.length;i++){
+              title_and_url = all_links[i].split("***");
+              var resultElement = $('<a>');
+              resultElement.attr('href', title_and_url[1]);
+              resultElement.text(title_and_url[0]);
+              resultElement.appendTo('#result');
+              newlineElement = $('<br>');
+              newlineElement.appendTo('#result');
+            }
+             });
+  }
+};
+
   Dropzone.instances = [];
 
   Dropzone.forElement = function(element) {
