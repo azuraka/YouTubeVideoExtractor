@@ -139,10 +139,10 @@ def search_youtube(query_hindi, query_english):
                 if(count<5):
                     if link.get('href')[0:6] == '/watch' and '&list=' not in link.get('href'):
                         if link.get('title') != None:
-                            #titles.append(link.get('title'))
-                            #links.append('http://www.youtube.com' + link.get('href'))
                             if link.get('title') not in results.keys():
-                                results[link.get('title')] = 'http://www.youtube.com' + link.get('href')
+                                video_id = link.get('href').split("?")[1].split("=")[1]
+                                thumbnail_url = 'https://img.youtube.com/vi/'+ video_id +'/0.jpg'
+                                results[link.get('title')] = ['http://www.youtube.com' + link.get('href'), thumbnail_url]
                                 count+=1
                 else:
                     break
@@ -161,10 +161,10 @@ def search_youtube(query_hindi, query_english):
                 if(count<5):
                     if link.get('href')[0:6] == '/watch' and '&list=' not in link.get('href'):
                         if link.get('title') != None:
-                            #titles.append(link.get('title'))
-                            #links.append('http://www.youtube.com' + link.get('href'))
                             if link.get('title') not in results.keys():
-                                results[link.get('title')] = 'http://www.youtube.com' + link.get('href')
+                                video_id = link.get('href').split("?")[1].split("=")[1]
+                                thumbnail_url = 'https://img.youtube.com/vi/'+ video_id +'/0.jpg'
+                                results[link.get('title')] = ['http://www.youtube.com' + link.get('href'), thumbnail_url]
                                 count+=1
                 else:
                     break
@@ -174,5 +174,5 @@ def search_youtube(query_hindi, query_english):
     print(results)
     converted_string=""
     for key, value in results.items():
-        converted_string+=key+"***"+value+"|||"
+        converted_string+=key+"***"+value[0]+"***"+value[1]+"|||"
     return converted_string

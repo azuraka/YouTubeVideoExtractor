@@ -1404,11 +1404,15 @@
             all_links = responseText.split("|||")
             for(i=0;i<all_links.length;i++){
               title_and_url = all_links[i].split("***");
+              var thumbnailElement = $('<img width="80px">');
+              thumbnailElement.attr('src', title_and_url[2]);
+              thumbnailElement.appendTo('#result');
               var resultElement = $('<a>');
               resultElement.attr('href', title_and_url[1]);
               resultElement.text(title_and_url[0]);
               resultElement.appendTo('#result');
-              newlineElement = $('<br>');
+              var newlineElement = $('<br>');
+              newlineElement.appendTo('#result');
               newlineElement.appendTo('#result');
             }
              });
