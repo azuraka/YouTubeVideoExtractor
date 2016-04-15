@@ -50,14 +50,14 @@ def preprocess_data(data_hindi):
     #print (text_hindi)
     #print (text_english)
     
-    #sentiment_analysis(text_english)
-    #noun_phrases(text_english)
+    sentiment_analysis(text_english)
+    noun_phrases(text_english)
     #parts_of_speech(text_english)
 
     query_hindi = create_search_query(title_hindi, text_hindi)
     query_english = create_search_query(title_english, text_english)
-    #print (query_hindi)
-    #print (query_english)
+    print (query_hindi)
+    print (query_english)
     results = search_youtube(query_hindi, query_english)
     return results
 
@@ -171,7 +171,7 @@ def search_youtube(query_hindi, query_english):
         else:
             break
 
-    print(results)
+    #print(results)
     converted_string=""
     for key, value in results.items():
         converted_string+=key+"***"+value[0]+"***"+value[1]+"|||"

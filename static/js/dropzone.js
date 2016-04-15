@@ -1402,21 +1402,30 @@
     thisDropzone = this;
         this.on("success", function(file, responseText) {
             all_links = responseText.split("|||")
-            var heading = $('<h3>');
+            var heading = $('<h2>');
             heading.text("Top 10 results");
-            heading.appendTo('#result');
+            heading.appendTo('#big');
             for(i=0;i<all_links.length;i++){
+              var outerDiv=$('<div id="outer" class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">');
+              var outerid = 'outer'+ i.toString();
+              var outeridwithhash = '#outer'+ i.toString();
+              outerDiv.attr('id',outerid);
+              outerDiv.appendTo('#big');
+
+              var innerDiv=$('<div class="testimonial-content">');
+              var innerid = 'inner'+ i.toString();
+              var inneridwithhash = '#inner'+ i.toString();
+              outerDiv.attr('id',innerid);
+              innerDiv.appendTo(outeridwithhash);
+          
               title_and_url = all_links[i].split("***");
-              var thumbnailElement = $('<img width="80px">');
+              var thumbnailElement = $('<img onerror="this.src=""">');
               thumbnailElement.attr('src', title_and_url[2]);
-              thumbnailElement.appendTo('#result');
-              var resultElement = $('<a>');
+              var resultElement = $('<a target="_blank"><p></p></a>');
               resultElement.attr('href', title_and_url[1]);
               resultElement.text(title_and_url[0]);
-              resultElement.appendTo('#result');
-              var newlineElement = $('<br>');
-              newlineElement.appendTo('#result');
-              newlineElement.appendTo('#result');
+              thumbnailElement.appendTo(inneridwithhash);
+              resultElement.appendTo(inneridwithhash);
             }
              });
   }
