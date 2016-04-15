@@ -1402,6 +1402,9 @@
     thisDropzone = this;
         this.on("success", function(file, responseText) {
             all_links = responseText.split("|||")
+            var heading = $('<h3>');
+            heading.text("Top 10 results");
+            heading.appendTo('#result');
             for(i=0;i<all_links.length;i++){
               title_and_url = all_links[i].split("***");
               var thumbnailElement = $('<img width="80px">');
