@@ -1,12 +1,10 @@
-from django.shortcuts import render, redirect, render_to_response
-from django.http import HttpResponse
-from django.template.loader import get_template 
+from django.shortcuts import render
+from django.http import HttpResponse 
 from textblob import TextBlob
 from collections import OrderedDict
-import lxml
-from lxml import etree
 from bs4 import BeautifulSoup
 import os, re, json, urllib.parse, urllib.request
+
 
 # to render home page
 def index(request):
@@ -19,15 +17,16 @@ def file_upload(request):
     if request.method == 'POST':
         filename = str(request.FILES['file'])
         if not os.path.exists(os.getcwd() + '/static/articles'):
-                    os.mkdir(os.getcwd() + '/static/articles')
+            os.mkdir(os.getcwd() + '/static/articles')
         with open(os.getcwd() + '/static/articles/{}'.format(request.FILES['file']), 'wb+') as destination:
-                    for chunk in request.FILES['file']:
-                        destination.write(chunk)
+            for chunk in request.FILES['file']:
+                destination.write(chunk)
         with open(os.getcwd() + '/static/articles/{}'.format(request.FILES['file']), 'r') as article:
             data_hindi = json.load(article)
 
         results = preprocess_data(data_hindi)
         return HttpResponse(results)
+
 
 # All preprocessing of data goes here
 def preprocess_data(data_hindi):
@@ -62,6 +61,7 @@ def preprocess_data(data_hindi):
     results = search_youtube(query_hindi, query_english)
     return results
 
+
 # Sentiment Analysis of news article text
 def sentiment_analysis(text_english):
     blob = TextBlob(text_english)
@@ -82,6 +82,8 @@ def parts_of_speech(text_english):
     print (blob.tags)
     #return blob.tags
 
+
+# Create Search Query by removing the terms from title based upon inverted index of text
 def create_search_query(title, text):
     inverted_index = {}
     title = list(TextBlob(title).words)
@@ -102,6 +104,8 @@ def create_search_query(title, text):
     #print (query)
     return query
 
+
+# Generating all possible n-gram combinations
 def n_grams(query):
     query_list=[]
     words_query = TextBlob(query).words
@@ -112,6 +116,7 @@ def n_grams(query):
         for par in combination_list:
             query_list.append(" ".join(par))
     return query_list
+
 
 # Actual query search going here
 def search_youtube(query_hindi, query_english):

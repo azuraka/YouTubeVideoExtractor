@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>YouTube Video Extractor</title>
-<link rel="icon" href="/static/img/favicon.png">
-<link rel="stylesheet" href="/static/css/dropzone.css">
-<script src="/static/js/dropzone.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<title>YouTube Video Extractor</title>
+	<link rel="icon" href="/static/img/favicon.png">
+	<link rel="stylesheet" href="/static/css/dropzone.css">
+	<script src="/static/js/dropzone.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 </head>
 <body>
-	<form action="/file_upload"
-      class="dropzone"
+	<form action="/file_upload" class="dropzone"
       id="my-awesome-dropzone" method="post">
       {% csrf_token %}
 	</form>
