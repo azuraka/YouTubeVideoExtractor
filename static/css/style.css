@@ -226,10 +226,15 @@ h2 {
 }
 .testimonial-content {
   background-color: #f2f2f2;
-  height: 500px;
+  height: 270px;
   max-width: 260px;
   margin: 0 auto 30px;
 }
+
+#result{
+  background-color: #ffffff;
+}
+
 .testimonial-content  p {
     padding: 10px 20px;
     text-align: left;

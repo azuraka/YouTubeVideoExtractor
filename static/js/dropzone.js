@@ -1405,7 +1405,7 @@
             var heading = $('<h2>');
             heading.text("Top 10 results");
             heading.appendTo('#big');
-            for(i=0;i<all_links.length;i++){
+            for(i=0;i<all_links.length-1;i++){
               var outerDiv=$('<div id="outer" class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">');
               var outerid = 'outer'+ i.toString();
               var outeridwithhash = '#outer'+ i.toString();
@@ -1415,7 +1415,7 @@
               var innerDiv=$('<div class="testimonial-content">');
               var innerid = 'inner'+ i.toString();
               var inneridwithhash = '#inner'+ i.toString();
-              outerDiv.attr('id',innerid);
+              innerDiv.attr('id',innerid);
               innerDiv.appendTo(outeridwithhash);
           
               title_and_url = all_links[i].split("***");
