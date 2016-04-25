@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse 
+from django.http import HttpResponse
 from textblob import TextBlob
 from collections import OrderedDict
 from bs4 import BeautifulSoup
@@ -8,7 +8,7 @@ import os, re, json, urllib.parse, urllib.request
 
 # to render home page
 def index(request):
-    results2={}
+    results2 = {}
     return render(request, 'app/index.html', results2)
 
 
@@ -38,12 +38,12 @@ def preprocess_data(data_hindi):
 
     sentiment_analysis(text_english)
     noun_phrases(text_english)
-    #parts_of_speech(text_english)
+    # parts_of_speech(text_english)
 
     query_hindi = create_search_query(title_hindi, text_hindi)
     query_english = create_search_query(title_english, text_english)
     print ("Hindi Query Formed:\n" + query_hindi + "\n")
-    print ("English Query Formed:\n" + query_english + "\n")
+    print ("English Query Formed:\n" + query_english + "\n=========================\n")
     results = search_youtube(query_hindi, query_english)
     return results
 
@@ -51,22 +51,22 @@ def preprocess_data(data_hindi):
 # Sentiment Analysis of news article text
 def sentiment_analysis(text_english):
     blob = TextBlob(text_english)
-    print ("Sentiment Analysis Result:\n" + str(blob.sentiment) + "\n")
-    #return str(blob.sentiment)
+    print ("\n=========================\nSentiment Analysis Result:\n" + str(blob.sentiment) + "\n")
+#   return str(blob.sentiment)
 
 
-# Noun Phrase Identification over the text 
+# Noun Phrase Identification over the text
 def noun_phrases(text_english):
     blob = TextBlob(text_english)
     print ("Extracted Noun Phrases:\n" + str(blob.noun_phrases) + "\n")
-    #return str(blob.noun_phrases)
+#   return str(blob.noun_phrases)
 
 
 # Parts of speech for each word
 def parts_of_speech(text_english):
     blob = TextBlob(text_english)
     print (blob.tags)
-    #return blob.tags
+#   return blob.tags
 
 
 # Create Search Query by removing the terms from title based upon inverted index of text
@@ -76,27 +76,27 @@ def create_search_query(title, text):
     text = list(TextBlob(text).words)
     for word in text:
         if word in inverted_index.keys():
-            inverted_index[word]+=1
+            inverted_index[word] += 1
         else:
-            inverted_index[word]=1
-    #print (inverted_index)
+            inverted_index[word] = 1
+#   print (inverted_index)
     for word in title:
         if word in inverted_index.keys():
-            if inverted_index[word]<2:
+            if inverted_index[word] < 2:
                 title.remove(word)
         else:
             title.remove(word)
     query = " ".join(title)
-    #print (query)
+#   print (query)
     return query
 
 
 # Generating all possible n-gram combinations
 def n_grams(query):
-    query_list=[]
+    query_list = []
     words_query = TextBlob(query).words
     blob = TextBlob(query)
-    query_length=len(words_query)
+    query_length = len(words_query)
     for n in range(query_length, 2, -1):
         combination_list = blob.ngrams(n=n)
         for par in combination_list:
@@ -108,57 +108,56 @@ def n_grams(query):
 def search_youtube(query_hindi, query_english):
     query_list_inorder_hindi = n_grams(query_hindi)
     query_list_inorder_english = n_grams(query_english)
-    #print (query_list_inorder_hindi)
-    #print (query_list_inorder_english)
-    
-    results=OrderedDict()
+#   print (query_list_inorder_hindi)
+#   print (query_list_inorder_english)
+    results = OrderedDict()
     count = 0
-    
+
     for query in query_list_inorder_hindi:
-        if(count<5):
-            query_string = urllib.parse.urlencode({"search_query" : query})
+        if(count < 5):
+            query_string = urllib.parse.urlencode({"search_query": query})
             html_content = urllib.request.urlopen("http://www.youtube.com/results?" + query_string)
             soup = BeautifulSoup(html_content.read().decode(), 'html.parser')
             titles = []
             links = []
             for link in soup.find_all('a'):
-                if(count<5):
+                if(count < 5):
                     if link.get('href')[0:6] == '/watch' and '&list=' not in link.get('href'):
                         if link.get('title') != None:
                             if link.get('title') not in results.keys():
                                 video_id = link.get('href').split("?")[1].split("=")[1]
-                                thumbnail_url = 'https://img.youtube.com/vi/'+ video_id +'/0.jpg'
+                                thumbnail_url = 'https://img.youtube.com/vi/' + video_id + '/0.jpg'
                                 results[link.get('title')] = ['http://www.youtube.com' + link.get('href'), thumbnail_url]
-                                count+=1
+                                count += 1
                 else:
                     break
         else:
             break
 
-    count=0
+    count = 0
     for query in query_list_inorder_english:
-        if(count<5):
-            query_string = urllib.parse.urlencode({"search_query" : query})
+        if(count < 5):
+            query_string = urllib.parse.urlencode({"search_query": query})
             html_content = urllib.request.urlopen("http://www.youtube.com/results?" + query_string)
             soup = BeautifulSoup(html_content.read().decode(), 'html.parser')
             titles = []
             links = []
             for link in soup.find_all('a'):
-                if(count<5):
+                if(count < 5):
                     if link.get('href')[0:6] == '/watch' and '&list=' not in link.get('href'):
                         if link.get('title') != None:
                             if link.get('title') not in results.keys():
                                 video_id = link.get('href').split("?")[1].split("=")[1]
-                                thumbnail_url = 'https://img.youtube.com/vi/'+ video_id +'/0.jpg'
+                                thumbnail_url = 'https://img.youtube.com/vi/' + video_id + '/0.jpg'
                                 results[link.get('title')] = ['http://www.youtube.com' + link.get('href'), thumbnail_url]
-                                count+=1
+                                count += 1
                 else:
                     break
         else:
             break
 
-    #print(results)
-    converted_string=""
+#   print(results)
+    converted_string = ""
     for key, value in results.items():
-        converted_string+=key+"***"+value[0]+"***"+value[1]+"|||"
+        converted_string += key+"***" + value[0] + "***" + value[1] + "|||"
     return converted_string
