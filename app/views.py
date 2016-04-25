@@ -36,28 +36,14 @@ def preprocess_data(data_hindi):
     text_hindi = data_hindi["text"]
     text_english = str(TextBlob(text_hindi).translate(to="en"))
 
-    #keywords_list = data_hindi["keywords"].split(',')
-    #for index, term in enumerate(keywords_list):
-    #    term = term.strip()
-    #    blob = TextBlob(term)
-    #    try:
-    #        keywords_list[index] = str(blob.translate(to="en"))
-    #    except:
-    #        pass
-    #keywords_english = ' '.join(keywords_list)
-    #print (title_hindi)
-    #print (title_english)
-    #print (text_hindi)
-    #print (text_english)
-    
     sentiment_analysis(text_english)
     noun_phrases(text_english)
     #parts_of_speech(text_english)
 
     query_hindi = create_search_query(title_hindi, text_hindi)
     query_english = create_search_query(title_english, text_english)
-    print (query_hindi)
-    print (query_english)
+    print ("Hindi Query Formed:\n" + query_hindi + "\n")
+    print ("English Query Formed:\n" + query_english + "\n")
     results = search_youtube(query_hindi, query_english)
     return results
 
@@ -65,14 +51,14 @@ def preprocess_data(data_hindi):
 # Sentiment Analysis of news article text
 def sentiment_analysis(text_english):
     blob = TextBlob(text_english)
-    print (blob.sentiment)
+    print ("Sentiment Analysis Result:\n" + str(blob.sentiment) + "\n")
     #return str(blob.sentiment)
 
 
 # Noun Phrase Identification over the text 
 def noun_phrases(text_english):
     blob = TextBlob(text_english)
-    print (blob.noun_phrases)
+    print ("Extracted Noun Phrases:\n" + str(blob.noun_phrases) + "\n")
     #return str(blob.noun_phrases)
 
 
