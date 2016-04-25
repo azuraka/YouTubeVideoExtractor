@@ -43,7 +43,7 @@ def preprocess_data(data_hindi):
     query_hindi = create_search_query(title_hindi, text_hindi)
     query_english = create_search_query(title_english, text_english)
     print ("Hindi Query Formed:\n" + query_hindi + "\n")
-    print ("English Query Formed:\n" + query_english + "\n=========================\n")
+    print ("English Query Formed:\n" + query_english + "\n=============================================================\n")
     results = search_youtube(query_hindi, query_english)
     return results
 
@@ -51,7 +51,7 @@ def preprocess_data(data_hindi):
 # Sentiment Analysis of news article text
 def sentiment_analysis(text_english):
     blob = TextBlob(text_english)
-    print ("\n=========================\nSentiment Analysis Result:\n" + str(blob.sentiment) + "\n")
+    print ("\n=============================================================\nSentiment Analysis Result:\n" + str(blob.sentiment) + "\n")
 #   return str(blob.sentiment)
 
 
